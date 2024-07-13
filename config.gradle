@@ -46,4 +46,14 @@ ext {
             "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.9.0",
     ]
 
+    netDependencies2 = [
+            "kotlinx-coroutines-core"               :   "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
+            "kotlinx:kotlinx-coroutines-android"    :   "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4",
+            "retrofit"                              :   "com.squareup.retrofit2:retrofit:2.9.0",
+            "converter-gson"                        :   "com.squareup.retrofit2:converter-gson:2.9.0",
+            "okhttp"                                :   "com.squareup.okhttp3:okhttp:4.9.3",
+            "logging-interceptor"                   :   "com.squareup.okhttp3:logging-interceptor:4.9.3",
+            "kotlinx-coroutines-flow"               :   "org.jetbrains.kotlinx:kotlinx-coroutines-flow:1.6.4"
+    ]
+
 }
