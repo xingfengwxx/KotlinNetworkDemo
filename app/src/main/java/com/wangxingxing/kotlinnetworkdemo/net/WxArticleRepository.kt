@@ -6,6 +6,9 @@ import com.wangxingxing.network.base.BaseRepository
 import com.wangxingxing.network.entity.ApiResponse
 import com.wangxingxing.network.entity.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 /**
@@ -32,6 +35,11 @@ class WxArticleRepository : BaseRepository() {
         }
     }
 
+    suspend fun fetchWxArticleFromNetByFlow(): Flow<ApiResponse<List<WxArticleBean>>> {
+        val response = executeHttp { mService.getWxArticle() }
+        return flow { emit(response) }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun fetchWxArticleError(): ApiResponse<List<WxArticleBean>> {
         return executeHttp {
             mService.getWxArticleError()
@@ -40,6 +48,11 @@ class WxArticleRepository : BaseRepository() {
 
     suspend fun fetchWxArticleFromDb(): ApiResponse<List<WxArticleBean>> {
         return getWxArticleFromDatabase()
+    }
+
+    suspend fun fetchWxArticleFromDbByFlow(): Flow<ApiResponse<List<WxArticleBean>>> {
+        val response = getWxArticleFromDatabase()
+        return flow { emit(response) }.flowOn(Dispatchers.IO)
     }
 
     private suspend fun getWxArticleFromDatabase(): ApiResponse<List<WxArticleBean>> = withContext(Dispatchers.IO) {

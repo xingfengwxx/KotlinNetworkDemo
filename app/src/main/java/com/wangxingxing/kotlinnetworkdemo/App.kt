@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ProcessLifecycleOwner
 
 /**
  * author : 王星星
@@ -22,7 +21,7 @@ open class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationLifecycleObserver())
+//        ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationLifecycleObserver())
     }
 
     private inner class ApplicationLifecycleObserver : LifecycleObserver {

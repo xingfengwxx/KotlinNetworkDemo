@@ -6,12 +6,15 @@ import kotlinx.coroutines.delay
 
 /**
  * author : 王星星
- * date : 2021/10/14 17:31
+ * date : 2024/7/19 15:36
  * email : 1099420259@qq.com
- * description : 数据仓库基类
+ * description :
  */
 open class BaseRepository {
+
     suspend fun <T> executeHttp(block: suspend () -> ApiResponse<T>): ApiResponse<T> {
+        //for test
+        delay(500)
         runCatching {
             block.invoke()
         }.onSuccess { data: ApiResponse<T> ->
@@ -26,9 +29,8 @@ open class BaseRepository {
      * 非后台返回错误，捕获到的异常
      */
     private fun <T> handleHttpError(e: Throwable): ApiErrorResponse<T> {
-        if (BuildConfig.DEBUG)
-            e.printStackTrace()
-        handlingExceptions(e)
+        if (BuildConfig.DEBUG) e.printStackTrace()
+//        handlingExceptions(e)
         return ApiErrorResponse(e)
     }
 
@@ -39,7 +41,7 @@ open class BaseRepository {
         return if (data.isSuccess) {
             getHttpSuccessResponse(data)
         } else {
-            handlingApiExceptions(data.errorCode, data.errorMsg)
+//            handlingApiExceptions(data.errorCode, data.errorMsg)
             ApiFailedResponse(data.errorCode, data.errorMsg)
         }
     }
@@ -55,4 +57,5 @@ open class BaseRepository {
             ApiSuccessResponse(data)
         }
     }
+
 }

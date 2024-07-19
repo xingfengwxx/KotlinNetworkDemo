@@ -5,25 +5,24 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 /**
  * author : 王星星
- * date : 2021/10/14 18:41
+ * date : 2024/7/19 15:20
  * email : 1099420259@qq.com
- * description : RetrofitClient基类
+ * description :
  */
 abstract class BaseRetrofitClient {
 
-    companion object Client {
+    companion object CLIENT {
         private const val TIME_OUT = 5
     }
 
     private val client: OkHttpClient by lazy {
         val builder = OkHttpClient.Builder()
-            .addInterceptor(getHttpLoggingInterceptor())
-            .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+                .addInterceptor(getHttpLoggingInterceptor())
+                .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
         handleBuilder(builder)
         builder.build()
     }
@@ -42,10 +41,10 @@ abstract class BaseRetrofitClient {
 
     open fun <Service> getService(serviceClass: Class<Service>, baseUrl: String): Service {
         return Retrofit.Builder()
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
-            .build()
-            .create(serviceClass)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(baseUrl)
+                .build()
+                .create(serviceClass)
     }
 }
