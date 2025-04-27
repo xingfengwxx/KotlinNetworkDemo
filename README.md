@@ -22,3 +22,5 @@ MVVM官方架构图
 
 - flow:**`Kotlin`+`协程`+`Flow`+`Retrofit`+`OkHttp`+`Repository`**
     - 解耦更彻底，可以独立于ui模块运行。
+- plus:**`Kotlin`+`协程`+`Flow`+`Retrofit`+`OkHttp`+`Repository`**
+    - 通过反射和动态代理实现Repository减少模板代码

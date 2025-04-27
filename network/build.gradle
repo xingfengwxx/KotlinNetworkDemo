@@ -35,5 +35,7 @@ def apiDependencies = rootProject.ext.netDependencies
 
 dependencies {
 
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
     apiDependencies.each { k, v -> api v }
 }
